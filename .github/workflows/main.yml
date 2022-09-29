@@ -41,7 +41,7 @@ jobs:
           cd clo835_fall2022_assignment1/  
           ls -ltra
           
-          docker network create -d bridge my-net
+          #docker network create -d bridge my-net
           
           # Docker build for mysql
           docker build -t -f Dockerfile_mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
