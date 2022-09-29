@@ -44,10 +44,10 @@ jobs:
           #docker network create -d bridge my-net
           
           # Docker build for mysql
-          docker build -t -f Dockerfile_mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
+          docker build -f Dockerfile_mysql -t $ECR_REGISTRY/$ECR_REPO_PREFIX-db:$IMAGE_TAG .
           
           # Docker build for app
-          docker build -t -f Dockerfile $ECR_REGISTRY/$ECR_REPO_PREFIX-app:$IMAGE_TAG .
+          docker build -f Dockerfile -t $ECR_REGISTRY/$ECR_REPO_PREFIX-app:$IMAGE_TAG .
           
           
           
