@@ -133,3 +133,7 @@ jobs:
           #docker tag lime $ECR_REGISTRY/assgnmnt1-dev-app:lime
           #docker push $ECR_REGISTRY/assgnmnt1-dev-app:lime
           
+          dig +short myip.opendns.com @resolver1.opendns.com
+          dig TXT +short o-o.myaddr.l.google.com @ns1.google.com
+
+          
