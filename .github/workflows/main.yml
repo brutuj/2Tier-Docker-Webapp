@@ -1,5 +1,6 @@
 
 
+
 name: New Build Docker Image and Push to AWS ECR
 
 on:
@@ -60,10 +61,11 @@ jobs:
           
           
           # Unit test
-          docker run -d --network my-net -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
+          docker run -d --network my-net --name database -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
+          docker tag database $ECR_REGISTRY/assgnmnt1-dev-mysql:after.run
           docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
           
           
@@ -87,7 +89,8 @@ jobs:
           docker ps 
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/assgnmnt1-dev-blue:v1.0
+          docker tag blue $ECR_REGISTRY/assgnmnt1-dev-app:blue
+          docker push $ECR_REGISTRY/assgnmnt1-dev-app:blue
       
       
       
@@ -108,7 +111,8 @@ jobs:
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/assgnmnt1-dev-pink:v1.0
+          docker tag pink $ECR_REGISTRY/assgnmnt1-dev-app:pink
+          docker push $ECR_REGISTRY/assgnmnt1-dev-app:pink
       
       
       
@@ -128,5 +132,6 @@ jobs:
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/assgnmnt1-dev-lime:v1.0
+          docker tag lime $ECR_REGISTRY/assgnmnt1-dev-app:lime
+          docker push $ECR_REGISTRY/assgnmnt1-dev-app:lime
           
