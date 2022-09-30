@@ -1,6 +1,5 @@
 
 
-
 name: New Build Docker Image and Push to AWS ECR
 
 on:
@@ -65,8 +64,8 @@ jobs:
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker tag database $ECR_REGISTRY/assgnmnt1-dev-mysql:after.run
-          docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
+          #docker tag database $ECR_REGISTRY/assgnmnt1-dev-mysql:after.run
+          #docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
           
           
           
@@ -89,8 +88,8 @@ jobs:
           docker ps 
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker tag blue $ECR_REGISTRY/assgnmnt1-dev-app:blue
-          docker push $ECR_REGISTRY/assgnmnt1-dev-app:blue
+          #docker tag blue $ECR_REGISTRY/assgnmnt1-dev-app:blue
+          #docker push $ECR_REGISTRY/assgnmnt1-dev-app:blue
       
       
       
@@ -111,8 +110,8 @@ jobs:
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker tag pink $ECR_REGISTRY/assgnmnt1-dev-app:pink
-          docker push $ECR_REGISTRY/assgnmnt1-dev-app:pink
+          #docker tag pink $ECR_REGISTRY/assgnmnt1-dev-app:pink
+          #docker push $ECR_REGISTRY/assgnmnt1-dev-app:pink
       
       
       
@@ -132,6 +131,6 @@ jobs:
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker tag lime $ECR_REGISTRY/assgnmnt1-dev-app:lime
-          docker push $ECR_REGISTRY/assgnmnt1-dev-app:lime
+          #docker tag lime $ECR_REGISTRY/assgnmnt1-dev-app:lime
+          #docker push $ECR_REGISTRY/assgnmnt1-dev-app:lime
           
