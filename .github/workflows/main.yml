@@ -45,10 +45,11 @@ jobs:
           
           # Docker build for mysql
           docker build -f Dockerfile_mysql -t $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
-          
+          docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
+
           # Docker build for app
           docker build -f Dockerfile -t $ECR_REGISTRY/$ECR_REPO_PREFIX-app:$IMAGE_TAG .
-          
+          docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-app:$IMAGE_TAG
           
           
       - name: MySQL tag, and push image to Amazon ECR
