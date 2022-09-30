@@ -44,12 +44,12 @@ jobs:
           #docker network create -d bridge my-net
           
           # Docker build for mysql
-          docker build -f Dockerfile_mysql -t $ECR_REGISTRY/assgnmnt1-dev-mysql:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:$IMAGE_TAG
+          docker build -f Dockerfile_mysql -t $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0 .
+          docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
 
           # Docker build for app
-          docker build -f Dockerfile -t $ECR_REGISTRY/assgnmnt1-dev-app:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/assgnmnt1-dev-app:$IMAGE_TAG
+          docker build -f Dockerfile -t $ECR_REGISTRY/assgnmnt1-dev-app:v1.0 .
+          docker push $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
           
           
       - name: MySQL tag, and push image to Amazon ECR
