@@ -61,7 +61,7 @@ jobs:
           
           
           # Unit test
-          docker run -d --network my-net -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPO_PREFIX-db:$IMAGE_TAG
+          docker run -d --network my-net -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
