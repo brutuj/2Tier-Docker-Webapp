@@ -105,7 +105,7 @@ jobs:
           
         
           # Unit test
-          docker run -d -p 8082:8080 --network my-net --name pink -e APP_COLOR=pink -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-pink:v1.0
+          docker run -d -p 8082:8080 --network my-net --name pink -e APP_COLOR=pink -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
@@ -126,7 +126,7 @@ jobs:
           
         
           # Unit test
-          docker run -d -p 8083:8080 --network my-net --name lime -e APP_COLOR=lime -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-lime:v1.0
+          docker run -d -p 8083:8080 --network my-net --name lime -e APP_COLOR=lime -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
