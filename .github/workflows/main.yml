@@ -14,11 +14,7 @@ jobs:
     env:
      ECR_REPO_PREFIX: assgnmnt1-dev
      IMAGE_TAG: v1.0
-     DBHOST: 172.18.0.2
-     DBPORT: 3306
-     DBUSER: root
-     DATABASE: employees
-     DBPWD: pw
+    
        
      
     steps:
@@ -41,7 +37,7 @@ jobs:
           cd clo835_fall2022_assignment1/  
           ls -ltra
           
-          #docker network create -d bridge my-net
+          docker network create -d bridge my-net
           
           # Docker build for mysql
           docker build -f Dockerfile_mysql -t $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0 .
@@ -63,11 +59,11 @@ jobs:
           
           
           # Unit test
-          docker run -d --network my-net -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
+          docker run -d --network my-net -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
+          docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
           
           
           
@@ -86,11 +82,11 @@ jobs:
           
          
           # Unit test
-          docker run -d -p 8081:8080 --network my-net --name blue -e APP_COLOR=blue -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e DBUSER=$DBUSER -e DBPWD=$DBPWD $ECR_REGISTRY/$ECR_REPO_PREFIX-app:$IMAGE_TAG
+          docker run -d -p 8081:8080 --network my-net --name blue -e APP_COLOR=blue -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
           docker ps 
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG
+          docker push $ECR_REGISTRY/assgnmnt1-dev-blue:v1.0
       
       
       
@@ -107,11 +103,11 @@ jobs:
           
         
           # Unit test
-          docker run -d -p 8082:8080 --network my-net --name pink -e APP_COLOR=pink -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e DBUSER=$DBUSER -e DBPWD=$DBPWD $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
+          docker run -d -p 8082:8080 --network my-net --name pink -e APP_COLOR=pink -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-pink:v1.0
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
+          docker push $ECR_REGISTRY/assgnmnt1-dev-pink:v1.0
       
       
       
@@ -127,9 +123,9 @@ jobs:
           
         
           # Unit test
-          docker run -d -p 8083:8080 --network my-net --name lime -e APP_COLOR=lime -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e DBUSER=$DBUSER -e DBPWD=$DBPWD $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG
+          docker run -d -p 8083:8080 --network my-net --name lime -e APP_COLOR=lime -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-lime:v1.0
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG
+          docker push $ECR_REGISTRY/assgnmnt1-dev-lime:v1.0
           
