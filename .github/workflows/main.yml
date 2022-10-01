@@ -1,5 +1,5 @@
 
-name: New Build Docker Image and Push to AWS ECR
+name: Building Docker Images and Pushing to AWS ECR
 
 on:
   push:
@@ -11,12 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
  
-    env:
-     ECR_REPO_PREFIX: assgnmnt1-dev
-     IMAGE_TAG: v1.0
-    
-       
-     
     steps:
       - uses: actions/checkout@v3
       
@@ -30,110 +24,18 @@ jobs:
           AWS_REGION: us-east-1   
           
           
-      - name: Initialization, Creating Bridge network, Building Docker Images
+      - name: Building Docker Images for mysql and webapp and Pushing to ECR
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           cd clo835_fall2022_assignment1/  
           ls -ltra
-          
-          docker network create -d bridge my-net
-          
-          # Docker build for mysql
+                    
+          # Building Docker image for mysql
           docker build -f Dockerfile_mysql -t $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0 .
-          docker images
           docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
 
-          # Docker build for app
+          # Building docker for webapp
           docker build -f Dockerfile -t $ECR_REGISTRY/assgnmnt1-dev-app:v1.0 .
-          docker images
           docker push $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
-          
-          
-      - name: MySQL tag, and push image to Amazon ECR
-        env:
-         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          cd clo835_fall2022_assignment1/  
-          ls -ltra
-          
-          
-          # Unit test
-          docker run -d --network my-net --name database -e MYSQL_ROOT_PASSWORD=pw $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
-          docker ps
-          echo "Pause for 10 seconds to let container start"
-          sleep 10
-          #docker tag database $ECR_REGISTRY/assgnmnt1-dev-mysql:after.run
-          #docker push $ECR_REGISTRY/assgnmnt1-dev-mysql:v1.0
-          
-          
-          
-          
-          
-          
-          
-          
-      - name: Blue tag, and push image to Amazon ECR
-        env:
-         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          cd clo835_fall2022_assignment1/  
-          ls -ltra
-          
-          
-         
-          # Unit test
-          docker run -d -p 8081:8080 --network my-net --name blue -e APP_COLOR=blue -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
-          docker ps 
-          echo "Pause for 10 seconds to let container start"
-          sleep 10
-          #docker tag blue $ECR_REGISTRY/assgnmnt1-dev-app:blue
-          #docker push $ECR_REGISTRY/assgnmnt1-dev-app:blue
-      
-      
-      
-      
-      
-      
-      
-      - name: Pink tag, and push image to Amazon ECR
-        env:
-         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          cd clo835_fall2022_assignment1/  
-          ls -ltra
-          
-        
-          # Unit test
-          docker run -d -p 8082:8080 --network my-net --name pink -e APP_COLOR=pink -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
-          docker ps
-          echo "Pause for 10 seconds to let container start"
-          sleep 10
-          #docker tag pink $ECR_REGISTRY/assgnmnt1-dev-app:pink
-          #docker push $ECR_REGISTRY/assgnmnt1-dev-app:pink
-      
-      
-      
-      
-      
-      
-      - name: Lime tag, and push image to Amazon ECR
-        env:
-         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          cd clo835_fall2022_assignment1/   
-          ls -ltra
-          
-        
-          # Unit test
-          docker run -d -p 8083:8080 --network my-net --name lime -e APP_COLOR=lime -e DBHOST=172.18.0.2 -e DBPORT=3306 -e DBUSER=root -e DBPWD=pw $ECR_REGISTRY/assgnmnt1-dev-app:v1.0
-          docker ps
-          echo "Pause for 10 seconds to let container start"
-          sleep 10
-          #docker tag lime $ECR_REGISTRY/assgnmnt1-dev-app:lime
-          #docker push $ECR_REGISTRY/assgnmnt1-dev-app:lime
-          
-          dig +short myip.opendns.com @resolver1.opendns.com
-          dig TXT +short o-o.myaddr.l.google.com @ns1.google.com
-
-          
+          docker images
