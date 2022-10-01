@@ -1,4 +1,5 @@
 
+
 name: New Build Docker Image and Push to AWS ECR
 
 on:
@@ -132,8 +133,4 @@ jobs:
           sleep 10
           #docker tag lime $ECR_REGISTRY/assgnmnt1-dev-app:lime
           #docker push $ECR_REGISTRY/assgnmnt1-dev-app:lime
-          
-          dig +short myip.opendns.com @resolver1.opendns.com
-          dig TXT +short o-o.myaddr.l.google.com @ns1.google.com
 
-          
