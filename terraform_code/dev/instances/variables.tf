@@ -18,7 +18,7 @@ variable "env" {
 }
 
 variable "ecr_repo" {
-  default     = ["app", "db"]
+  default     = ["app", "mysql"]
   type        = set(string)
   description = "Amazon ECR Repository Names"
 }
