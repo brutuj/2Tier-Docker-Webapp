@@ -9,5 +9,5 @@ output "default_tags" {
 
 # Prefix to identify resources
 output "prefix" {
-  value     = "assgnmnt1"
+  value     = "Webapp"
 }
